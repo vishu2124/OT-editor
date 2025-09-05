@@ -1,0 +1,96 @@
+sequenceDiagram
+    participant U1 as User 1
+    participant U2 as User 2
+    participant FE1 as Frontend 1
+    participant FE2 as Frontend 2
+    participant BFF as BFF Layer
+    participant CS as Collaboration Service
+    participant DS as Document Service
+    participant PG as PostgreSQL
+    participant WS as WebSocket Server
+
+    Note over U1,WS: Real-time Multi-user Editing
+    
+    U1->>FE1: Open document
+    FE1->>BFF: GET /pages/{id}
+    BFF->>DS: Get page content
+    DS->>PG: SELECT page data
+    PG-->>DS: Page content
+    DS-->>BFF: Page data
+    BFF-->>FE1: Page content
+    FE1->>WS: Join document room
+    WS->>CS: Register user presence
+    CS->>PG: Update user_presence table
+    PG-->>CS: Presence updated
+    
+    U2->>FE2: Open same document
+    FE2->>BFF: GET /pages/{id}
+    BFF->>DS: Get page content
+    DS->>PG: SELECT page data
+    PG-->>DS: Page content
+    DS-->>BFF: Page data
+    BFF-->>FE2: Page content
+    FE2->>WS: Join document room
+    WS->>CS: Register user presence
+    CS->>PG: Update user_presence table
+    PG-->>CS: Presence updated
+    
+    Note over U1,WS: Presence Indicators
+    
+    WS-->>FE1: User 2 joined
+    WS-->>FE2: User 1 present
+    FE1->>FE1: Show User 2 avatar
+    FE2->>FE2: Show User 1 avatar
+    
+    Note over U1,WS: Real-time Editing with CRDT
+    
+    U1->>FE1: Type text
+    FE1->>FE1: Apply local change
+    FE1->>WS: Send operation (CRDT)
+    WS->>CS: Process operation
+    CS->>CS: Apply CRDT transformation
+    CS->>PG: Store operation in operations_log
+    PG-->>CS: Operation stored
+    CS->>WS: Broadcast to other users
+    WS-->>FE2: Send transformed operation
+    FE2->>FE2: Apply remote change
+    FE2-->>U2: Show User 1's changes
+    
+    Note over U1,WS: Comments and Mentions
+    
+    U1->>FE1: Add comment with @User2
+    FE1->>BFF: POST /pages/{id}/comments
+    BFF->>DS: Create comment
+    DS->>PG: INSERT into comments table
+    PG-->>DS: Comment created
+    DS-->>BFF: Comment data
+    BFF->>CS: Notify mentioned user
+    CS->>WS: Send notification
+    WS-->>FE2: Comment notification
+    FE2-->>U2: Show comment with mention
+    
+    Note over U1,WS: Document Locking
+    
+    U1->>FE1: Lock document
+    FE1->>BFF: PUT /pages/{id}/lock
+    BFF->>DS: Lock document
+    DS->>PG: UPDATE pages SET locked_by=user1
+    PG-->>DS: Document locked
+    DS-->>BFF: Lock success
+    BFF->>CS: Broadcast lock status
+    CS->>WS: Send lock notification
+    WS-->>FE2: Document locked by User 1
+    FE2->>FE2: Disable editing controls
+    FE2-->>U2: Show lock indicator
+    
+    Note over U1,WS: Publishing Workflow
+    
+    U1->>FE1: Publish draft
+    FE1->>BFF: PUT /pages/{id}/publish
+    BFF->>DS: Publish page
+    DS->>PG: UPDATE pages SET draft=false
+    PG-->>DS: Page published
+    DS->>CS: Notify collaborators
+    CS->>WS: Send publish notification
+    WS-->>FE2: Page published notification
+    FE2-->>U2: Show published status

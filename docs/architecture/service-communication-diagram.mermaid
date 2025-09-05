@@ -1,0 +1,80 @@
+graph TB
+    subgraph "Frontend Layer"
+        FE[React SPA]
+    end
+    
+    subgraph "BFF Layer"
+        BFF[API Gateway<br/>Node.js/Express]
+        AUTH[Auth Middleware<br/>JWT Validation]
+        CACHE[Redis Cache<br/>Response Caching]
+        CB[Circuit Breaker<br/>Fault Tolerance]
+    end
+    
+    subgraph "Microservices"
+        US[User Service<br/>Port: 3001]
+        DS[Document Service<br/>Port: 3002]
+        CS[Collaboration Service<br/>Port: 3003]
+        SS[Search Service<br/>Port: 3004]
+        NS[Notification Service<br/>Port: 3005]
+    end
+    
+    subgraph "Data Layer"
+        PG[(PostgreSQL<br/>Primary DB)]
+        ES[(Elasticsearch<br/>Search Index)]
+        RD[(Redis<br/>Cache/Sessions)]
+    end
+    
+    subgraph "Event Bus"
+        EB[Redis Pub/Sub<br/>Event Streaming]
+    end
+    
+    subgraph "External Services"
+        EMAIL[Email Service<br/>SMTP/SendGrid]
+        SSO[SSO Providers<br/>OAuth 2.0]
+    end
+    
+    %% Frontend to BFF
+    FE -->|HTTP/WebSocket| BFF
+    
+    %% BFF Internal Flow
+    BFF --> AUTH
+    BFF --> CACHE
+    BFF --> CB
+    
+    %% BFF to Microservices (HTTP)
+    CB -->|HTTP REST| US
+    CB -->|HTTP REST| DS
+    CB -->|HTTP REST| SS
+    CB -->|HTTP REST| NS
+    
+    %% BFF to Collaboration Service (WebSocket)
+    BFF -.->|WebSocket| CS
+    
+    %% Microservices to Data Layer
+    US --> PG
+    DS --> PG
+    CS --> RD
+    SS --> ES
+    NS --> RD
+    
+    %% Event-Driven Communication
+    DS -.->|Events| EB
+    CS -.->|Events| EB
+    NS -.->|Events| EB
+    EB -.->|Events| DS
+    EB -.->|Events| CS
+    EB -.->|Events| NS
+    
+    %% External Service Integration
+    AUTH --> SSO
+    NS --> EMAIL
+    
+    %% Real-time Communication
+    CS -.->|WebSocket| FE
+    
+    %% Caching
+    CACHE --> RD
+    
+    %% Service Discovery (not shown but implied)
+    %% Consul/Etcd for service registration
+    %% Load balancer for service routing

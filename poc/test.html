@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confluence Clone POC - Test</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f5f7;
+        }
+        .container {
+            background: white;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 8px;
+        }
+        .btn-primary {
+            background-color: #0052cc;
+            color: white;
+        }
+        .btn-secondary {
+            background-color: #f4f5f7;
+            color: #172b4d;
+            border: 1px solid #dfe1e6;
+        }
+        .editor {
+            min-height: 300px;
+            border: 1px solid #dfe1e6;
+            border-radius: 6px;
+            padding: 16px;
+            margin: 16px 0;
+            outline: none;
+        }
+        .editor:focus {
+            border-color: #0052cc;
+            box-shadow: 0 0 0 2px rgba(0, 82, 204, 0.2);
+        }
+        .users {
+            display: flex;
+            gap: 8px;
+            margin: 16px 0;
+        }
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+        .status {
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+        .status.connected {
+            background-color: #e3fcef;
+            color: #36b37e;
+        }
+        .status.disconnected {
+            background-color: #ffebe6;
+            color: #ff5630;
+        }
+        
+        /* Cursor indicators */
+        .cursor-indicator {
+            position: absolute;
+            width: 3px;
+            height: 24px;
+            background-color: #0052cc;
+            pointer-events: none;
+            z-index: 10;
+            animation: blink 1s infinite;
+            border-radius: 1px;
+            box-shadow: 0 0 3px rgba(0, 82, 204, 0.5);
+        }
+        
+        .cursor-label {
+            position: absolute;
+            top: -30px;
+            left: -5px;
+            background-color: #0052cc;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+            white-space: nowrap;
+            pointer-events: none;
+            z-index: 11;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        
+        .editor-container {
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Confluence Clone POC - Test</h1>
+        
+        <div id="status" class="status disconnected">
+            Disconnected from server
+        </div>
+        
+        <div>
+            <button class="btn btn-primary" onclick="createDocument()">Create New Document</button>
+            <button class="btn btn-secondary" onclick="joinDocument()">Join Document</button>
+        </div>
+        
+        <div id="documentInfo" style="display: none;">
+            <h3>Document: <span id="documentTitle">Untitled</span></h3>
+            <p>Document ID: <span id="documentId"></span></p>
+            <p>Share URL: <span id="shareUrl"></span></p>
+            <button class="btn btn-secondary" onclick="copyShareUrl()">Copy Share URL</button>
+        </div>
+        
+        <div id="users" class="users"></div>
+        
+        <div class="editor-container" style="display: none;">
+            <div id="editor" class="editor" contenteditable="true">
+                Start typing your document here...
+            </div>
+        </div>
+        
+        <div id="messages"></div>
+        
+        <!-- Debug Panel -->
+        <div id="debugPanel" style="margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; border: 1px solid #dee2e6;">
+            <h3>🔍 Debug Information</h3>
+            <div id="debugInfo">
+                <p><strong>Current User:</strong> <span id="currentUserInfo"></span></p>
+                <p><strong>Document ID:</strong> <span id="debugDocumentId"></span></p>
+                <p><strong>Connection Status:</strong> <span id="debugConnection"></span></p>
+                <p><strong>Last Operation:</strong> <span id="lastOperation"></span></p>
+                <p><strong>Active Users:</strong> <span id="debugActiveUsers"></span></p>
+                <p><strong>Operation Count:</strong> <span id="operationCount">0</span></p>
+                <p><strong>Document Version:</strong> <span id="documentVersion">0</span></p>
+            </div>
+        </div>
+        
+        <!-- Testing Panel -->
+        <div id="testingPanel" style="margin-top: 20px; padding: 15px; background-color: #e3f2fd; border-radius: 8px; border: 1px solid #2196f3;">
+            <h3>🧪 Testing Scenarios</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <button class="btn btn-primary" onclick="testScenario1()">Test 1: Add Line</button>
+                <button class="btn btn-primary" onclick="testScenario2()">Test 2: Edit Between</button>
+                <button class="btn btn-primary" onclick="testScenario3()">Test 3: Replace Line</button>
+                <button class="btn btn-primary" onclick="testScenario4()">Test 4: Add/Delete Lines</button>
+                <button class="btn btn-secondary" onclick="clearDocument()">Clear Document</button>
+                <button class="btn btn-secondary" onclick="showTestInstructions()">Show Instructions</button>
+            </div>
+            <div id="testResults" style="margin-top: 10px; padding: 10px; background-color: white; border-radius: 4px; min-height: 50px; border: 1px solid #ccc;">
+                <em>Test results will appear here...</em>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        let socket = null;
+        let currentDocumentId = null;
+        let currentUser = null;
+        let currentSocketId = null;
+        let otherUsersCursors = new Map();
+        let operationCount = 0;
+        let documentVersion = 0;
+        
+        // Generate dummy user
+        function generateDummyUser() {
+            const names = ['Alice', 'Bob', 'Charlie', 'Diana', 'Eve', 'Frank', 'Grace', 'Henry'];
+            const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4', '#FFEAA7', '#DDA0DD', '#98D8C8', '#F7DC6F'];
+            
+            const name = names[Math.floor(Math.random() * names.length)];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            return {
+                id: Date.now().toString(),
+                name,
+                color,
+                avatar: name.charAt(0).toUpperCase()
+            };
+        }
+        
+        function updateStatus(connected) {
+            const statusEl = document.getElementById('status');
+            if (connected) {
+                statusEl.textContent = 'Connected to server';
+                statusEl.className = 'status connected';
+            } else {
+                statusEl.textContent = 'Disconnected from server';
+                statusEl.className = 'status disconnected';
+            }
+        }
+        
+        function connectToServer() {
+            socket = io('http://localhost:5000');
+            
+            socket.on('connect', () => {
+                updateStatus(true);
+                addMessage('Connected to server', 'success');
+            });
+            
+            socket.on('disconnect', () => {
+                updateStatus(false);
+                addMessage('Disconnected from server', 'error');
+            });
+            
+            socket.on('document-state', (data) => {
+                const editor = document.getElementById('editor');
+                editor.textContent = data.content;
+                lastContent = data.content;
+                
+                // Find current user in the active users list
+                const currentUserInList = data.activeUsers.find(user => user.id === currentUser.id);
+                if (currentUserInList) {
+                    currentSocketId = currentUserInList.socketId;
+                }
+                
+                updateUsers(data.activeUsers);
+            });
+            
+            socket.on('operation', (data) => {
+                if (data.user.socketId !== currentSocketId) {
+                    addMessage(`Operation from ${data.user.name}: ${data.operation.type}`, 'info');
+                    logOperation(data.operation, `RECEIVED from ${data.user.name}`);
+                    // Apply the operation to the editor
+                    applyOperation(data.operation);
+                }
+            });
+            
+            socket.on('user-joined', (user) => {
+                addMessage(`${user.name} joined the document`, 'success');
+            });
+            
+            socket.on('user-left', (user) => {
+                addMessage(`${user.name} left the document`, 'info');
+                removeUserCursor(user.id);
+            });
+            
+            socket.on('users-updated', (data) => {
+                updateUsers(data.activeUsers);
+                updateDebugUsers(data.activeUsers);
+            });
+            
+            socket.on('cursor-update', (data) => {
+                if (data.user.socketId !== currentSocketId) {
+                    updateUserCursor(data.user);
+                }
+            });
+        }
+        
+        function createDocument() {
+            const title = prompt('Enter document title:', 'My Document');
+            if (!title) return;
+            
+            fetch('/api/documents', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ title }),
+            })
+            .then(response => response.json())
+            .then(doc => {
+                currentDocumentId = doc.id;
+                document.getElementById('documentId').textContent = doc.id;
+                document.getElementById('documentTitle').textContent = doc.title;
+                document.getElementById('shareUrl').textContent = window.location.origin + '/document/' + doc.id;
+                document.getElementById('documentInfo').style.display = 'block';
+                document.querySelector('.editor-container').style.display = 'block';
+                
+                if (socket) {
+                    socket.emit('join-document', { documentId: doc.id });
+                }
+                
+                addMessage('Document created successfully', 'success');
+            })
+            .catch(error => {
+                addMessage('Error creating document: ' + error.message, 'error');
+            });
+        }
+        
+        function joinDocument() {
+            const documentId = prompt('Enter document ID:');
+            if (!documentId) return;
+            
+            currentDocumentId = documentId;
+            document.getElementById('documentId').textContent = documentId;
+            document.getElementById('shareUrl').textContent = window.location.origin + '/document/' + documentId;
+            document.getElementById('documentInfo').style.display = 'block';
+            document.querySelector('.editor-container').style.display = 'block';
+            
+            if (socket) {
+                socket.emit('join-document', { documentId });
+            }
+            
+            addMessage('Joining document...', 'info');
+        }
+        
+        function copyShareUrl() {
+            const shareUrl = document.getElementById('shareUrl').textContent;
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                addMessage('Share URL copied to clipboard', 'success');
+            });
+        }
+        
+        function updateUsers(users) {
+            const usersEl = document.getElementById('users');
+            usersEl.innerHTML = '';
+            
+            users.forEach(user => {
+                const avatar = document.createElement('div');
+                avatar.className = 'user-avatar';
+                avatar.style.backgroundColor = user.color;
+                avatar.textContent = user.avatar;
+                avatar.title = user.name;
+                usersEl.appendChild(avatar);
+                
+                // Update cursor position if user is not current user
+                if (user.socketId !== currentSocketId && user.cursor !== undefined) {
+                    updateUserCursor(user);
+                }
+            });
+        }
+        
+        function updateUserCursor(user) {
+            const editor = document.getElementById('editor');
+            const editorContainer = editor.parentElement;
+            
+            // Remove existing cursor for this user
+            const existingCursor = document.getElementById(`cursor-${user.id}`);
+            if (existingCursor) {
+                existingCursor.remove();
+            }
+            
+            // Create new cursor indicator
+            const cursorIndicator = document.createElement('div');
+            cursorIndicator.id = `cursor-${user.id}`;
+            cursorIndicator.className = 'cursor-indicator';
+            cursorIndicator.style.backgroundColor = user.color;
+            
+            // Create cursor label
+            const cursorLabel = document.createElement('div');
+            cursorLabel.className = 'cursor-label';
+            cursorLabel.style.backgroundColor = user.color;
+            cursorLabel.textContent = user.name;
+            
+            cursorIndicator.appendChild(cursorLabel);
+            
+            // Calculate position
+            const textNode = editor.firstChild;
+            if (textNode && user.cursor <= textNode.textContent.length) {
+                const range = document.createRange();
+                range.setStart(textNode, user.cursor);
+                range.collapse(true);
+                
+                const rect = range.getBoundingClientRect();
+                const editorRect = editor.getBoundingClientRect();
+                
+                cursorIndicator.style.left = (rect.left - editorRect.left) + 'px';
+                cursorIndicator.style.top = (rect.top - editorRect.top) + 'px';
+                
+                editorContainer.appendChild(cursorIndicator);
+            }
+            
+            // Store cursor reference
+            otherUsersCursors.set(user.id, cursorIndicator);
+        }
+        
+        function removeUserCursor(userId) {
+            const cursor = document.getElementById(`cursor-${userId}`);
+            if (cursor) {
+                cursor.remove();
+            }
+            otherUsersCursors.delete(userId);
+        }
+        
+        function applyOperation(operation) {
+            isApplyingOperation = true;
+            
+            const editor = document.getElementById('editor');
+            const currentContent = editor.textContent;
+            let newContent = currentContent;
+            
+            // Save current cursor position
+            const selection = window.getSelection();
+            const cursorPosition = selection.anchorOffset;
+            
+            // Transform operation position based on current content length
+            let transformedPosition = operation.position;
+            
+            // Basic operation transformation - adjust position if content has changed
+            if (operation.position > currentContent.length) {
+                transformedPosition = currentContent.length;
+            }
+            
+            if (operation.type === 'insert') {
+                newContent = currentContent.slice(0, transformedPosition) + 
+                           operation.content + 
+                           currentContent.slice(transformedPosition);
+                           
+                // Adjust cursor position if it's after the insertion point
+                if (cursorPosition >= transformedPosition) {
+                    const newCursorPosition = cursorPosition + operation.content.length;
+                    setTimeout(() => {
+                        setCursorPosition(newCursorPosition);
+                    }, 10);
+                }
+            } else if (operation.type === 'delete') {
+                const deleteLength = Math.min(operation.length || 1, currentContent.length - transformedPosition);
+                newContent = currentContent.slice(0, transformedPosition) + 
+                           currentContent.slice(transformedPosition + deleteLength);
+                           
+                // Adjust cursor position if it's after the deletion point
+                if (cursorPosition >= transformedPosition) {
+                    const newCursorPosition = Math.max(transformedPosition, cursorPosition - deleteLength);
+                    setTimeout(() => {
+                        setCursorPosition(newCursorPosition);
+                    }, 10);
+                }
+            } else if (operation.type === 'replace') {
+                const replaceLength = Math.min(operation.length || 1, currentContent.length - transformedPosition);
+                newContent = currentContent.slice(0, transformedPosition) + 
+                           operation.content + 
+                           currentContent.slice(transformedPosition + replaceLength);
+                           
+                // Adjust cursor position if it's after the replacement point
+                if (cursorPosition >= transformedPosition) {
+                    const newCursorPosition = transformedPosition + operation.content.length;
+                    setTimeout(() => {
+                        setCursorPosition(newCursorPosition);
+                    }, 10);
+                }
+            }
+            
+            editor.textContent = newContent;
+            lastContent = newContent;
+            
+            // Reset flag after a short delay
+            setTimeout(() => {
+                isApplyingOperation = false;
+            }, 10);
+        }
+        
+        function setCursorPosition(position) {
+            const editor = document.getElementById('editor');
+            const textNode = editor.firstChild;
+            if (textNode) {
+                const range = document.createRange();
+                const selection = window.getSelection();
+                range.setStart(textNode, Math.min(position, textNode.textContent.length));
+                range.collapse(true);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
+        }
+        
+        function addMessage(text, type) {
+            const messagesEl = document.getElementById('messages');
+            const message = document.createElement('div');
+            message.style.padding = '8px 12px';
+            message.style.margin = '4px 0';
+            message.style.borderRadius = '4px';
+            message.style.fontSize = '14px';
+            
+            if (type === 'success') {
+                message.style.backgroundColor = '#e3fcef';
+                message.style.color = '#36b37e';
+            } else if (type === 'error') {
+                message.style.backgroundColor = '#ffebe6';
+                message.style.color = '#ff5630';
+            } else {
+                message.style.backgroundColor = '#f4f5f7';
+                message.style.color = '#6b778c';
+            }
+            
+            message.textContent = text;
+            messagesEl.appendChild(message);
+            
+            // Auto-remove after 5 seconds
+            setTimeout(() => {
+                if (message.parentNode) {
+                    message.parentNode.removeChild(message);
+                }
+            }, 5000);
+        }
+        
+        // Debug functions
+        function updateDebugInfo() {
+            document.getElementById('currentUserInfo').textContent = 
+                `${currentUser.name} (${currentUser.avatar}) - ${currentUser.color} [${currentSocketId || 'No ID'}]`;
+            document.getElementById('debugDocumentId').textContent = currentDocumentId || 'None';
+            document.getElementById('debugConnection').textContent = socket ? 'Connected' : 'Disconnected';
+            document.getElementById('operationCount').textContent = operationCount;
+            document.getElementById('documentVersion').textContent = documentVersion;
+        }
+        
+        function logOperation(operation, type) {
+            const lastOp = document.getElementById('lastOperation');
+            const timestamp = new Date().toLocaleTimeString();
+            lastOp.innerHTML = `<span style="color: #666;">[${timestamp}]</span> ${type}: ${operation.type} at position ${operation.position}`;
+            
+            // Update counters
+            if (type.includes('SENT')) {
+                operationCount++;
+                documentVersion++;
+            }
+            updateDebugInfo();
+        }
+        
+        function updateDebugUsers(users) {
+            const debugUsers = document.getElementById('debugActiveUsers');
+            debugUsers.innerHTML = users.map(user => 
+                `<span style="color: ${user.color}; font-weight: bold;">${user.name}</span>`
+            ).join(', ');
+        }
+        
+        // Initialize
+        currentUser = generateDummyUser();
+        connectToServer();
+        updateDebugInfo();
+        
+        // Editor event handlers
+        let lastContent = '';
+        let isApplyingOperation = false;
+        let operationTimeout = null;
+        let pendingOperation = null;
+        
+        function sendCursorUpdate() {
+            if (socket && currentDocumentId) {
+                const selection = window.getSelection();
+                const cursorPosition = selection.anchorOffset;
+                
+                socket.emit('cursor-update', {
+                    documentId: currentDocumentId,
+                    cursor: cursorPosition
+                });
+            }
+        }
+        
+        function sendOperationDebounced(operation) {
+            // Clear any pending operation
+            if (operationTimeout) {
+                clearTimeout(operationTimeout);
+            }
+            
+            // Store the latest operation
+            pendingOperation = operation;
+            
+            // Send after a short delay to batch rapid changes
+            operationTimeout = setTimeout(() => {
+                if (pendingOperation && socket && currentDocumentId) {
+                    logOperation(pendingOperation, 'SENT (debounced)');
+                    socket.emit('operation', {
+                        documentId: currentDocumentId,
+                        operation: pendingOperation
+                    });
+                    pendingOperation = null;
+                }
+            }, 100); // 100ms debounce
+        }
+        
+        document.getElementById('editor').addEventListener('input', (e) => {
+            if (socket && currentDocumentId && !isApplyingOperation) {
+                const currentContent = e.target.textContent;
+                const oldContent = lastContent;
+                
+                // Find the difference between old and new content
+                const diff = findTextDifference(oldContent, currentContent);
+                
+                if (diff) {
+                    const operation = {
+                        type: diff.type,
+                        position: diff.position,
+                        content: diff.content,
+                        length: diff.length,
+                        timestamp: Date.now()
+                    };
+                    
+                    sendOperationDebounced(operation);
+                }
+                
+                lastContent = currentContent;
+                
+                // Send cursor update
+                setTimeout(sendCursorUpdate, 10);
+            }
+        });
+        
+        function findTextDifference(oldText, newText) {
+            // Find the first different character
+            let start = 0;
+            while (start < oldText.length && start < newText.length && oldText[start] === newText[start]) {
+                start++;
+            }
+            
+            // Find the last different character from the end
+            let oldEnd = oldText.length;
+            let newEnd = newText.length;
+            while (oldEnd > start && newEnd > start && oldText[oldEnd - 1] === newText[newEnd - 1]) {
+                oldEnd--;
+                newEnd--;
+            }
+            
+            if (start === oldEnd && start === newEnd) {
+                return null; // No change
+            }
+            
+            if (newText.length > oldText.length) {
+                // Insertion
+                return {
+                    type: 'insert',
+                    position: start,
+                    content: newText.slice(start, newEnd)
+                };
+            } else if (newText.length < oldText.length) {
+                // Deletion
+                return {
+                    type: 'delete',
+                    position: start,
+                    length: oldEnd - start
+                };
+            } else {
+                // Replacement (delete + insert)
+                return {
+                    type: 'replace',
+                    position: start,
+                    length: oldEnd - start,
+                    content: newText.slice(start, newEnd)
+                };
+            }
+        }
+        
+        // Track cursor movement
+        document.getElementById('editor').addEventListener('keyup', sendCursorUpdate);
+        document.getElementById('editor').addEventListener('click', sendCursorUpdate);
+        document.getElementById('editor').addEventListener('focus', sendCursorUpdate);
+        
+        // Testing functions
+        function testScenario1() {
+            const editor = document.getElementById('editor');
+            editor.textContent = 'This is the first line of our collaborative document.';
+            lastContent = editor.textContent;
+            logTestResult('Test 1: Added first line - "This is the first line of our collaborative document."');
+        }
+        
+        function testScenario2() {
+            const editor = document.getElementById('editor');
+            const currentText = editor.textContent;
+            if (currentText.includes('first line')) {
+                const newText = currentText.replace('first line', 'first collaborative line');
+                editor.textContent = newText;
+                lastContent = newText;
+                logTestResult('Test 2: Edited between text - added "collaborative" to the line');
+            } else {
+                logTestResult('Test 2: No text to edit. Run Test 1 first.');
+            }
+        }
+        
+        function testScenario3() {
+            const editor = document.getElementById('editor');
+            editor.textContent = 'This is a completely new line that replaces everything.';
+            lastContent = editor.textContent;
+            logTestResult('Test 3: Replaced entire content with new line');
+        }
+        
+        function testScenario4() {
+            const editor = document.getElementById('editor');
+            const currentText = editor.textContent;
+            const newText = currentText + '\nThis is the second line.\nThis is the third line.';
+            editor.textContent = newText;
+            lastContent = newText;
+            
+            // Simulate deleting the second line after a short delay
+            setTimeout(() => {
+                const lines = editor.textContent.split('\n');
+                if (lines.length >= 2) {
+                    lines.splice(1, 1); // Remove second line
+                    editor.textContent = lines.join('\n');
+                    lastContent = editor.textContent;
+                    logTestResult('Test 4: Added 2 lines, then deleted the second line');
+                }
+            }, 1000);
+            
+            logTestResult('Test 4: Added 2 new lines to the document');
+        }
+        
+        function clearDocument() {
+            const editor = document.getElementById('editor');
+            editor.textContent = '';
+            lastContent = '';
+            logTestResult('Document cleared');
+        }
+        
+        function logTestResult(message) {
+            const testResults = document.getElementById('testResults');
+            const timestamp = new Date().toLocaleTimeString();
+            testResults.innerHTML += `<div style="margin: 5px 0; padding: 5px; background-color: #f0f0f0; border-radius: 3px;">
+                <strong>[${timestamp}]</strong> ${message}
+            </div>`;
+            testResults.scrollTop = testResults.scrollHeight;
+        }
+        
+        function showTestInstructions() {
+            const instructions = `
+                <h4>🧪 Testing Instructions:</h4>
+                <ol>
+                    <li><strong>Setup:</strong> Open 4 browser tabs to this URL</li>
+                    <li><strong>Test 1:</strong> Click "Test 1: Add Line" in one tab</li>
+                    <li><strong>Test 2:</strong> Click "Test 2: Edit Between" in another tab</li>
+                    <li><strong>Test 3:</strong> Click "Test 3: Replace Line" in a third tab</li>
+                    <li><strong>Test 4:</strong> Click "Test 4: Add/Delete Lines" in the fourth tab</li>
+                </ol>
+                <p><strong>Expected Results:</strong></p>
+                <ul>
+                    <li>All users should see the same user list</li>
+                    <li>All edits should sync in real-time</li>
+                    <li>Each user's cursor should appear in different colors</li>
+                    <li>Operations should be debounced (not character-by-character)</li>
+                </ul>
+            `;
+            document.getElementById('testResults').innerHTML = instructions;
+        }
+    </script>
+</body>
+</html>

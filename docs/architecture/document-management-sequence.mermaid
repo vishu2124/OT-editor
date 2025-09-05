@@ -1,0 +1,79 @@
+sequenceDiagram
+    participant U as User
+    participant FE as Frontend
+    participant BFF as BFF Layer
+    participant DS as Document Service
+    participant SS as Search Service
+    participant PG as PostgreSQL
+    participant ES as Elasticsearch
+
+    Note over U,ES: Create Space
+    
+    U->>FE: Create new space
+    FE->>BFF: POST /spaces
+    BFF->>DS: Create space request
+    DS->>PG: INSERT into spaces table
+    PG-->>DS: Space created
+    DS-->>BFF: Space data
+    BFF-->>FE: Space created response
+    FE-->>U: Display new space
+    
+    Note over U,ES: Create Page with Hierarchy
+    
+    U->>FE: Create page in space
+    FE->>BFF: POST /spaces/{id}/pages
+    BFF->>DS: Create page request
+    DS->>PG: INSERT into pages table (with parent_id)
+    PG-->>DS: Page created
+    DS->>SS: Index page for search
+    SS->>ES: Add to search index
+    ES-->>SS: Indexed
+    SS-->>DS: Search index updated
+    DS-->>BFF: Page data
+    BFF-->>FE: Page created response
+    FE-->>U: Display new page
+    
+    Note over U,ES: Version History
+    
+    U->>FE: Edit page content
+    FE->>BFF: PUT /pages/{id}
+    BFF->>DS: Update page request
+    DS->>PG: INSERT into page_versions (current version)
+    PG-->>DS: Version saved
+    DS->>PG: UPDATE pages table (new content)
+    PG-->>DS: Page updated
+    DS->>SS: Update search index
+    SS->>ES: Update document
+    ES-->>SS: Updated
+    SS-->>DS: Search updated
+    DS-->>BFF: Update success
+    BFF-->>FE: Page updated response
+    FE-->>U: Show updated content
+    
+    Note over U,ES: Search Documents
+    
+    U->>FE: Search query
+    FE->>BFF: GET /search?q={query}
+    BFF->>SS: Search request
+    SS->>ES: Full-text search query
+    ES-->>SS: Search results
+    SS->>PG: Get additional page metadata
+    PG-->>SS: Page details
+    SS-->>BFF: Search results with metadata
+    BFF-->>FE: Formatted results
+    FE-->>U: Display search results
+    
+    Note over U,ES: Archive Page
+    
+    U->>FE: Archive page
+    FE->>BFF: PUT /pages/{id}/archive
+    BFF->>DS: Archive request
+    DS->>PG: UPDATE pages SET archived=true
+    PG-->>DS: Page archived
+    DS->>SS: Remove from search index
+    SS->>ES: Delete document
+    ES-->>SS: Removed
+    SS-->>DS: Search updated
+    DS-->>BFF: Archive success
+    BFF-->>FE: Archive confirmed
+    FE-->>U: Page archived notification

@@ -1,0 +1,48 @@
+graph TB
+    subgraph "Frontend Layer"
+        FE[React SPA<br/>Tailwind CSS]
+    end
+    
+    subgraph "BFF Layer"
+        BFF[API Gateway<br/>Node.js/Express]
+        AUTH[Auth Service<br/>JWT/OAuth]
+    end
+    
+    subgraph "Microservices"
+        US[User Service<br/>RBAC/Permissions]
+        DS[Document Service<br/>CRUD/Versioning]
+        CS[Collaboration Service<br/>Real-time Editing]
+        SS[Search Service<br/>Elasticsearch]
+        NS[Notification Service<br/>Email/In-app]
+    end
+    
+    subgraph "Data Layer"
+        PG[(PostgreSQL<br/>Primary DB)]
+        ES[(Elasticsearch<br/>Search Index)]
+        RD[(Redis<br/>Cache/Sessions)]
+    end
+    
+    subgraph "External Services"
+        SSO[SSO Providers<br/>Google/Microsoft]
+        EMAIL[Email Service<br/>SMTP/SendGrid]
+    end
+    
+    FE --> BFF
+    BFF --> AUTH
+    BFF --> US
+    BFF --> DS
+    BFF --> CS
+    BFF --> SS
+    BFF --> NS
+    
+    US --> PG
+    DS --> PG
+    CS --> RD
+    SS --> ES
+    NS --> EMAIL
+    
+    AUTH --> SSO
+    AUTH --> RD
+    
+    CS -.->|WebSocket| FE
+    NS -.->|WebSocket| FE

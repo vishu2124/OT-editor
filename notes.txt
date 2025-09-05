@@ -1,0 +1,876 @@
+https://astrogo.atlassian.net/cgraphql?q=useDraftSyncSetRelationMutation
+
+[
+    {
+        "data": {
+            "updateRelation": {
+                "targetKey": "4480270371",
+                "sourceKey": "712020:59c24993-2215-4484-95e4-0a02bad904e2",
+                "relationName": "touched",
+                "url": "https://astrogo.atlassian.net/wiki/rest/api/relation/touched/from/user/712020:59c24993-2215-4484-95e4-0a02bad904e2/to/content/4480270371",
+                "__typename": "UpdateRelationPayload"
+            }
+        }
+    }
+]
+
+https://as.atlassian.com/api/v1/batch
+
+https://astrogo.atlassian.net/wiki/rest/api/content/4480270371/?status=draft&action=sync
+
+{
+    "id": "4480270371",
+    "type": "page",
+    "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:page/4480270371",
+    "base64EncodedAri": "YXJpOmNsb3VkOmNvbmZsdWVuY2U6N2Y2ZGQ5ZDEtMTMyNi00ZjNlLWJmNDYtYjY5OGY4MzRkNzdjOmNvbnRlbnQvNDQ4MDI3MDM3MQ==",
+    "status": "draft",
+    "title": "[OTT-WEB] SEO for Web",
+    "space": {
+        "id": 3872129091,
+        "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:space/3872129091",
+        "key": "ALC",
+        "alias": "ALC",
+        "name": "Alcantara",
+        "type": "global",
+        "status": "current",
+        "_expandable": {
+            "settings": "/rest/api/space/ALC/settings",
+            "metadata": "",
+            "identifiers": "",
+            "roles": "",
+            "icon": "",
+            "typeSettings": "",
+            "description": "",
+            "history": "",
+            "operations": "",
+            "lookAndFeel": "/rest/api/settings/lookandfeel?spaceKey=ALC",
+            "permissions": "",
+            "theme": "/rest/api/space/ALC/theme",
+            "homepage": "/rest/api/content/3872129801"
+        },
+        "_links": {
+            "webui": "/spaces/ALC",
+            "self": "https://astrogo.atlassian.net/wiki/rest/api/space/ALC"
+        }
+    },
+    "history": {
+        "latest": false,
+        "createdBy": {
+            "type": "known",
+            "accountId": "712020:59c24993-2215-4484-95e4-0a02bad904e2",
+            "accountType": "atlassian",
+            "email": "vishwanath.singh@tothenew.com",
+            "publicName": "vishwanath.singh",
+            "profilePicture": {
+                "path": "/wiki/aa-avatar/712020:59c24993-2215-4484-95e4-0a02bad904e2",
+                "width": 48,
+                "height": 48,
+                "isDefault": false
+            },
+            "displayName": "vishwanath.singh",
+            "isExternalCollaborator": false,
+            "isGuest": true,
+            "locale": "en_GB",
+            "accountStatus": "active",
+            "_expandable": {
+                "operations": "",
+                "personalSpace": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/user?accountId=712020:59c24993-2215-4484-95e4-0a02bad904e2"
+            }
+        },
+        "ownedBy": {
+            "type": "known",
+            "accountId": "712020:59c24993-2215-4484-95e4-0a02bad904e2",
+            "accountType": "atlassian",
+            "email": "vishwanath.singh@tothenew.com",
+            "publicName": "vishwanath.singh",
+            "profilePicture": {
+                "path": "/wiki/aa-avatar/712020:59c24993-2215-4484-95e4-0a02bad904e2",
+                "width": 48,
+                "height": 48,
+                "isDefault": false
+            },
+            "displayName": "vishwanath.singh",
+            "isExternalCollaborator": false,
+            "isGuest": true,
+            "locale": "en_GB",
+            "accountStatus": "active",
+            "_expandable": {
+                "operations": "",
+                "personalSpace": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/user?accountId=712020:59c24993-2215-4484-95e4-0a02bad904e2"
+            }
+        },
+        "createdDate": "2025-06-24T10:04:15.300Z",
+        "_expandable": {
+            "lastUpdated": "",
+            "previousVersion": "",
+            "contributors": "",
+            "nextVersion": ""
+        },
+        "_links": {
+            "self": "https://astrogo.atlassian.net/wiki/rest/api/content/4480270371/history"
+        }
+    },
+    "version": {
+        "by": {
+            "type": "known",
+            "accountId": "712020:59c24993-2215-4484-95e4-0a02bad904e2",
+            "accountType": "atlassian",
+            "email": "vishwanath.singh@tothenew.com",
+            "publicName": "vishwanath.singh",
+            "profilePicture": {
+                "path": "/wiki/aa-avatar/712020:59c24993-2215-4484-95e4-0a02bad904e2",
+                "width": 48,
+                "height": 48,
+                "isDefault": false
+            },
+            "displayName": "vishwanath.singh",
+            "isExternalCollaborator": false,
+            "isGuest": true,
+            "locale": "en_GB",
+            "accountStatus": "active",
+            "_expandable": {
+                "operations": "",
+                "personalSpace": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/user?accountId=712020:59c24993-2215-4484-95e4-0a02bad904e2"
+            }
+        },
+        "when": "2025-09-04T11:03:05.788Z",
+        "friendlyWhen": "just a moment ago",
+        "message": "",
+        "number": 1,
+        "minorEdit": false,
+        "ncsStepVersion": "7",
+        "ncsStepVersionSource": "ncs-ack",
+        "confRev": "confluence$content$4478468209.51",
+        "contentTypeModified": false,
+        "_expandable": {
+            "collaborators": "",
+            "content": "/rest/api/content/4480270371?status=draft"
+        },
+        "_links": {
+            "self": "https://astrogo.atlassian.net/wiki/rest/api/content/4480270371/version/1"
+        }
+    },
+    "ancestors": [
+        {
+            "id": "3872129801",
+            "type": "page",
+            "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:page/3872129801",
+            "base64EncodedAri": "YXJpOmNsb3VkOmNvbmZsdWVuY2U6N2Y2ZGQ5ZDEtMTMyNi00ZjNlLWJmNDYtYjY5OGY4MzRkNzdjOmNvbnRlbnQvMzg3MjEyOTgwMQ==",
+            "status": "current",
+            "title": "Project Alcantara Confluence Space",
+            "macroRenderedOutput": {},
+            "extensions": {
+                "position": 7
+            },
+            "_expandable": {
+                "container": "/rest/api/space/ALC",
+                "metadata": "",
+                "restrictions": "/rest/api/content/3872129801/restriction/byOperation",
+                "history": "/rest/api/content/3872129801/history",
+                "body": "",
+                "version": "",
+                "descendants": "/rest/api/content/3872129801/descendant",
+                "space": "/rest/api/space/ALC",
+                "childTypes": "",
+                "schedulePublishInfo": "",
+                "operations": "",
+                "schedulePublishDate": "",
+                "children": "/rest/api/content/3872129801/child",
+                "ancestors": "",
+                "draftVersion": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/content/3872129801",
+                "tinyui": "/x/CQPM5g",
+                "editui": "/pages/resumedraft.action?draftId=3872129801",
+                "webui": "/spaces/ALC/overview",
+                "edituiv2": "/spaces/ALC/pages/edit-v2/3872129801"
+            }
+        },
+        {
+            "id": "3880091695",
+            "type": "page",
+            "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:page/3880091695",
+            "base64EncodedAri": "YXJpOmNsb3VkOmNvbmZsdWVuY2U6N2Y2ZGQ5ZDEtMTMyNi00ZjNlLWJmNDYtYjY5OGY4MzRkNzdjOmNvbnRlbnQvMzg4MDA5MTY5NQ==",
+            "status": "current",
+            "title": "ARCHITECTURE",
+            "macroRenderedOutput": {},
+            "extensions": {
+                "position": 67408595
+            },
+            "_expandable": {
+                "container": "/rest/api/space/ALC",
+                "metadata": "",
+                "restrictions": "/rest/api/content/3880091695/restriction/byOperation",
+                "history": "/rest/api/content/3880091695/history",
+                "body": "",
+                "version": "",
+                "descendants": "/rest/api/content/3880091695/descendant",
+                "space": "/rest/api/space/ALC",
+                "childTypes": "",
+                "schedulePublishInfo": "",
+                "operations": "",
+                "schedulePublishDate": "",
+                "children": "/rest/api/content/3880091695/child",
+                "ancestors": "",
+                "draftVersion": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/content/3880091695",
+                "tinyui": "/x/L4BF5w",
+                "editui": "/pages/resumedraft.action?draftId=3880091695",
+                "webui": "/spaces/ALC/pages/3880091695/ARCHITECTURE",
+                "edituiv2": "/spaces/ALC/pages/edit-v2/3880091695"
+            }
+        },
+        {
+            "id": "4119789703",
+            "type": "page",
+            "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:page/4119789703",
+            "base64EncodedAri": "YXJpOmNsb3VkOmNvbmZsdWVuY2U6N2Y2ZGQ5ZDEtMTMyNi00ZjNlLWJmNDYtYjY5OGY4MzRkNzdjOmNvbnRlbnQvNDExOTc4OTcwMw==",
+            "status": "current",
+            "title": "PayTV Solution Architecture",
+            "macroRenderedOutput": {},
+            "extensions": {
+                "position": 788
+            },
+            "_expandable": {
+                "container": "/rest/api/space/ALC",
+                "metadata": "",
+                "restrictions": "/rest/api/content/4119789703/restriction/byOperation",
+                "history": "/rest/api/content/4119789703/history",
+                "body": "",
+                "version": "",
+                "descendants": "/rest/api/content/4119789703/descendant",
+                "space": "/rest/api/space/ALC",
+                "childTypes": "",
+                "schedulePublishInfo": "",
+                "operations": "",
+                "schedulePublishDate": "",
+                "children": "/rest/api/content/4119789703/child",
+                "ancestors": "",
+                "draftVersion": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/content/4119789703",
+                "tinyui": "/x/hwCP9Q",
+                "editui": "/pages/resumedraft.action?draftId=4119789703",
+                "webui": "/spaces/ALC/pages/4119789703/PayTV+Solution+Architecture",
+                "edituiv2": "/spaces/ALC/pages/edit-v2/4119789703"
+            }
+        },
+        {
+            "id": "4261380373",
+            "type": "page",
+            "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:page/4261380373",
+            "base64EncodedAri": "YXJpOmNsb3VkOmNvbmZsdWVuY2U6N2Y2ZGQ5ZDEtMTMyNi00ZjNlLWJmNDYtYjY5OGY4MzRkNzdjOmNvbnRlbnQvNDI2MTM4MDM3Mw==",
+            "status": "current",
+            "title": "PayTV: Devices",
+            "macroRenderedOutput": {},
+            "extensions": {
+                "position": 537878611
+            },
+            "_expandable": {
+                "container": "/rest/api/space/ALC",
+                "metadata": "",
+                "restrictions": "/rest/api/content/4261380373/restriction/byOperation",
+                "history": "/rest/api/content/4261380373/history",
+                "body": "",
+                "version": "",
+                "descendants": "/rest/api/content/4261380373/descendant",
+                "space": "/rest/api/space/ALC",
+                "childTypes": "",
+                "schedulePublishInfo": "",
+                "operations": "",
+                "schedulePublishDate": "",
+                "children": "/rest/api/content/4261380373/child",
+                "ancestors": "",
+                "draftVersion": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/content/4261380373",
+                "tinyui": "/x/FYH--Q",
+                "editui": "/pages/resumedraft.action?draftId=4261380373",
+                "webui": "/spaces/ALC/pages/4261380373/PayTV+Devices",
+                "edituiv2": "/spaces/ALC/pages/edit-v2/4261380373"
+            }
+        },
+        {
+            "id": "4261053074",
+            "type": "page",
+            "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:page/4261053074",
+            "base64EncodedAri": "YXJpOmNsb3VkOmNvbmZsdWVuY2U6N2Y2ZGQ5ZDEtMTMyNi00ZjNlLWJmNDYtYjY5OGY4MzRkNzdjOmNvbnRlbnQvNDI2MTA1MzA3NA==",
+            "status": "current",
+            "title": "PayTV: STB+Unmanaged Devices",
+            "macroRenderedOutput": {},
+            "extensions": {
+                "position": 260075705
+            },
+            "_expandable": {
+                "container": "/rest/api/space/ALC",
+                "metadata": "",
+                "restrictions": "/rest/api/content/4261053074/restriction/byOperation",
+                "history": "/rest/api/content/4261053074/history",
+                "body": "",
+                "version": "",
+                "descendants": "/rest/api/content/4261053074/descendant",
+                "space": "/rest/api/space/ALC",
+                "childTypes": "",
+                "schedulePublishInfo": "",
+                "operations": "",
+                "schedulePublishDate": "",
+                "children": "/rest/api/content/4261053074/child",
+                "ancestors": "",
+                "draftVersion": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/content/4261053074",
+                "tinyui": "/x/koL6-Q",
+                "editui": "/pages/resumedraft.action?draftId=4261053074",
+                "webui": "/spaces/ALC/pages/4261053074/PayTV+STB+Unmanaged+Devices",
+                "edituiv2": "/spaces/ALC/pages/edit-v2/4261053074"
+            }
+        }
+    ],
+    "container": {
+        "id": 3872129091,
+        "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:space/3872129091",
+        "key": "ALC",
+        "alias": "ALC",
+        "name": "Alcantara",
+        "type": "global",
+        "status": "current",
+        "history": {
+            "createdBy": {
+                "type": "known",
+                "accountId": "557058:a6ff5bd5-6039-4d04-96c1-db5aa6d33355",
+                "accountType": "atlassian",
+                "email": "",
+                "publicName": "Peter Koay",
+                "timeZone": "Asia/Kuala_Lumpur",
+                "profilePicture": {
+                    "path": "/wiki/aa-avatar/557058:a6ff5bd5-6039-4d04-96c1-db5aa6d33355",
+                    "width": 48,
+                    "height": 48,
+                    "isDefault": false
+                },
+                "displayName": "Peter Koay",
+                "isExternalCollaborator": false,
+                "isGuest": false,
+                "locale": "en_US",
+                "accountStatus": "active",
+                "_expandable": {
+                    "operations": "",
+                    "personalSpace": ""
+                },
+                "_links": {
+                    "self": "https://astrogo.atlassian.net/wiki/rest/api/user?accountId=557058:a6ff5bd5-6039-4d04-96c1-db5aa6d33355"
+                }
+            },
+            "createdDate": "2024-02-07T04:47:25.456Z"
+        },
+        "_expandable": {
+            "settings": "/rest/api/space/ALC/settings",
+            "metadata": "",
+            "operations": "",
+            "lookAndFeel": "/rest/api/settings/lookandfeel?spaceKey=ALC",
+            "identifiers": "",
+            "permissions": "",
+            "roles": "",
+            "icon": "",
+            "typeSettings": "",
+            "description": "",
+            "theme": "/rest/api/space/ALC/theme",
+            "homepage": "/rest/api/content/3872129801"
+        },
+        "_links": {
+            "webui": "/spaces/ALC",
+            "self": "https://astrogo.atlassian.net/wiki/rest/api/space/ALC"
+        }
+    },
+    "macroRenderedOutput": {},
+    "body": {
+        "storage": {
+            "value": "<p /><p>[ <u>Document control</u> ] [ <u>Solution overview</u> ] [ <u>Solution Sequence Diagram</u> ] [ <u>OPC Flow Diagram</u> ]</p><h4><strong>Document control</strong></h4><table data-table-width=\"760\" data-layout=\"default\" ac:local-id=\"023301e3-0863-4f3b-9dd5-2ed37b9d41f0\"><tbody><tr><td><p><strong>Solution owner</strong></p></td><td><p><ac:link><ri:user ri:account-id=\"5a30d1f973ad9e3ead2363bb\" ri:local-id=\"e042a185-18c5-4576-a77f-7c336d12b9fc\" /></ac:link><ac:link><ri:user ri:account-id=\"5c46cb920abefd4ed4eceb4a\" ri:local-id=\"78275b0e-db2b-4604-8920-ed700b43b925\" /></ac:link> <ac:link><ri:user ri:account-id=\"5a2e4cf0301ed0381f22d3c4\" ri:local-id=\"c0505aaa-2677-42f7-9f1f-da335b6f7c7f\" /></ac:link></p></td></tr><tr><td><p><strong>System architect owner</strong></p></td><td><p>@{SysArch} here</p></td></tr><tr><td><p><strong>Product owner</strong></p></td><td><p>@{ProdOwn} here</p></td></tr><tr><td><p><strong>TTN owner</strong></p></td><td><p><ac:link><ri:user ri:account-id=\"5a2e4cf0301ed0381f22d3c4\" ri:local-id=\"edbc09fb-841c-45a2-9e0d-2351fd243e22\" /></ac:link> <ac:link><ri:user ri:account-id=\"712020:59c24993-2215-4484-95e4-0a02bad904e2\" ri:local-id=\"79089cf0-6549-4e50-8f40-9a2d80ad1f18\" /></ac:link></p></td></tr><tr><td><p><strong>Customer owner</strong></p></td><td><p>@{CustLead} here</p></td></tr><tr><td><p><strong>Document creation date</strong></p></td><td><p><time datetime=\"2025-06-24\" /> </p></td></tr><tr><td><p><strong>Document version</strong></p></td><td data-highlight-colour=\"#ffffff\"><p /><p>v1.0</p></td></tr><tr><td><p><strong>Document status</strong></p></td><td><p><ac:structured-macro ac:name=\"status\" ac:schema-version=\"1\" ac:macro-id=\"1e95eedc-8516-4067-920d-e28f8e4a5efe\"><ac:parameter ac:name=\"title\">internal Review</ac:parameter><ac:parameter ac:name=\"colour\">Yellow</ac:parameter></ac:structured-macro> <ac:structured-macro ac:name=\"status\" ac:schema-version=\"1\" ac:macro-id=\"56081708-4281-4e2e-8b6f-95c047d7b63e\"><ac:parameter ac:name=\"title\">draft</ac:parameter></ac:structured-macro></p></td></tr><tr><td><p><strong>Document number</strong></p></td><td><p>4480270371</p></td></tr><tr><td><p><strong>Tracking Jira</strong></p></td><td><p><ac:structured-macro ac:name=\"jira\" ac:schema-version=\"1\" ac:macro-id=\"d75150eb-a760-4ccd-8c65-e93b7e19293b\"><ac:parameter ac:name=\"key\">ALTV-87</ac:parameter><ac:parameter ac:name=\"serverId\">f0a94ee6-f3ae-3007-8689-a561eebaa6c4</ac:parameter><ac:parameter ac:name=\"server\">System Jira</ac:parameter></ac:structured-macro> </p></td></tr></tbody></table><h4>Solution overview</h4><table data-table-width=\"1011\" data-layout=\"default\" ac:local-id=\"d7218824-66b3-473b-9af8-670bf12634a4\"><tbody><tr><td><p><strong>Overview</strong>&nbsp;</p></td><td><p>This document describe SEO solution for web.<br />Note : This does not include URL shortening and ContentId shortening solution.</p></td></tr><tr><td><p><strong>Alcantara Parent</strong></p></td><td><p>&nbsp;<ac:structured-macro ac:name=\"jira\" ac:schema-version=\"1\" ac:macro-id=\"e6efd989-4768-4742-938a-2347905b823f\"><ac:parameter ac:name=\"key\">ALTV-86</ac:parameter><ac:parameter ac:name=\"serverId\">f0a94ee6-f3ae-3007-8689-a561eebaa6c4</ac:parameter><ac:parameter ac:name=\"server\">System Jira</ac:parameter></ac:structured-macro></p></td></tr><tr><td><p><strong>Alcantara Tickets</strong></p></td><td><p> <ac:structured-macro ac:name=\"jira\" ac:schema-version=\"1\" ac:macro-id=\"cc6f75b6-caeb-44ab-8320-02dde718564d\"><ac:parameter ac:name=\"key\">ALTV-87</ac:parameter><ac:parameter ac:name=\"serverId\">f0a94ee6-f3ae-3007-8689-a561eebaa6c4</ac:parameter><ac:parameter ac:name=\"server\">System Jira</ac:parameter></ac:structured-macro></p></td></tr><tr><td><p><strong>Feature Parent</strong></p></td><td><p>&nbsp; </p></td></tr><tr><td><p><strong>Feature Tickets</strong></p></td><td><p>{Jira reference in Irdeto Workspace}</p></td></tr><tr><td><p><strong>Actors</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>User Interfaces</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>Systems</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>Preconditions</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>Main Scenario</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>Post Condition&nbsp;</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>APIs Used</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>OPC Req&rsquo;s</strong></p></td><td><p>{List of screens}</p><p>{List of fields (display name) and field attribute source per screen}</p><p>{OPC field validation rules}</p></td></tr><tr><td><p><strong>Monitoring Req&rsquo;s</strong></p></td><td><p>{Monitoring points, values to be monitored, thresholds for alerting}</p></td></tr><tr><td><p><strong>Data/Analytics Req&rsquo;s</strong></p></td><td><p>{Informed by SLA KPI&rsquo;s}</p></td></tr><tr><td><p><strong>Open Actions</strong></p></td><td><ul><li><p>{Open action for attention @{name} or Open action Jira ticket}</p></li></ul></td></tr></tbody></table><h4><strong>Solution Sequence Diagram</strong></h4><ac:image ac:align=\"center\" ac:layout=\"center\" ac:original-height=\"3839\" ac:original-width=\"2600\" ac:custom-width=\"true\" ac:alt=\"Mermaid Chart - Create complex, visual diagrams with text. A smarter way of creating diagrams.-2025-07-15-125415.png\" ac:width=\"760\"><ri:attachment ri:filename=\"Mermaid Chart - Create complex, visual diagrams with text. A smarter way of creating diagrams.-2025-07-15-125415.png\" ri:version-at-save=\"1\" /></ac:image><p><strong>Header Tags Mapping  </strong></p><p>H1,H2,H3,H4 header tags would be based on Content Meta information,&nbsp;these are defined in the Meta Mapping document <ac:link ac:card-appearance=\"inline\"><ri:page ri:content-title=\"Movie Figma Metadata Mapping\" ri:version-at-save=\"21\" /><ac:link-body>Movie Figma Metadata Mapping</ac:link-body></ac:link> and are also explained for ALTV-87 Pdf, Sample: H1- is fixed Link(Astro Link),&nbsp;H2- Rail Title ,Event Title, Content Title, H3 - Metadata Such as Year, Duration, Genre, Parental Rating, H4- Content Synopsis, Event Synopsis, etc.<br /></p><p>&nbsp;</p><h4>OPC Flow Diagram</h4><p>{Insert a flow diagram of intended operator actions/operator journey here}</p>",
+            "representation": "storage",
+            "embeddedContent": [],
+            "_expandable": {
+                "content": "/rest/api/content/4480270371?status=draft"
+            }
+        },
+        "_expandable": {
+            "editor": "",
+            "atlas_doc_format": "",
+            "view": "",
+            "export_view": "",
+            "styled_view": "",
+            "dynamic": "",
+            "editor2": "",
+            "anonymous_export_view": ""
+        }
+    },
+    "extensions": {
+        "position": 323087311
+    },
+    "_expandable": {
+        "childTypes": "",
+        "schedulePublishInfo": "",
+        "metadata": "",
+        "operations": "",
+        "schedulePublishDate": "",
+        "children": "/rest/api/content/4480270371/child",
+        "restrictions": "/rest/api/content/4480270371/restriction/byOperation",
+        "draftVersion": "",
+        "descendants": "/rest/api/content/4480270371/descendant"
+    },
+    "_links": {
+        "editui": "/pages/resumedraft.action?draftId=4480270371",
+        "webui": "/pages/resumedraft.action?draftId=4480270371",
+        "edituiv2": "/spaces/ALC/pages/edit-v2/4480270371",
+        "context": "/wiki",
+        "self": "https://astrogo.atlassian.net/wiki/rest/api/content/4480270371?status=draft",
+        "tinyui": "/x/cQDwCgE",
+        "collection": "/rest/api/content",
+        "base": "https://astrogo.atlassian.net/wiki"
+    }
+}  https://astrogo.atlassian.net/wiki/rest/api/content/4480270371/?status=draft&action=sync {
+    "id": "4480270371",
+    "type": "page",
+    "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:page/4480270371",
+    "base64EncodedAri": "YXJpOmNsb3VkOmNvbmZsdWVuY2U6N2Y2ZGQ5ZDEtMTMyNi00ZjNlLWJmNDYtYjY5OGY4MzRkNzdjOmNvbnRlbnQvNDQ4MDI3MDM3MQ==",
+    "status": "draft",
+    "title": "[OTT-WEB] SEO for Web",
+    "space": {
+        "id": 3872129091,
+        "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:space/3872129091",
+        "key": "ALC",
+        "alias": "ALC",
+        "name": "Alcantara",
+        "type": "global",
+        "status": "current",
+        "_expandable": {
+            "settings": "/rest/api/space/ALC/settings",
+            "metadata": "",
+            "identifiers": "",
+            "roles": "",
+            "icon": "",
+            "typeSettings": "",
+            "description": "",
+            "history": "",
+            "operations": "",
+            "lookAndFeel": "/rest/api/settings/lookandfeel?spaceKey=ALC",
+            "permissions": "",
+            "theme": "/rest/api/space/ALC/theme",
+            "homepage": "/rest/api/content/3872129801"
+        },
+        "_links": {
+            "webui": "/spaces/ALC",
+            "self": "https://astrogo.atlassian.net/wiki/rest/api/space/ALC"
+        }
+    },
+    "history": {
+        "latest": false,
+        "createdBy": {
+            "type": "known",
+            "accountId": "712020:59c24993-2215-4484-95e4-0a02bad904e2",
+            "accountType": "atlassian",
+            "email": "vishwanath.singh@tothenew.com",
+            "publicName": "vishwanath.singh",
+            "profilePicture": {
+                "path": "/wiki/aa-avatar/712020:59c24993-2215-4484-95e4-0a02bad904e2",
+                "width": 48,
+                "height": 48,
+                "isDefault": false
+            },
+            "displayName": "vishwanath.singh",
+            "isExternalCollaborator": false,
+            "isGuest": true,
+            "locale": "en_GB",
+            "accountStatus": "active",
+            "_expandable": {
+                "operations": "",
+                "personalSpace": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/user?accountId=712020:59c24993-2215-4484-95e4-0a02bad904e2"
+            }
+        },
+        "ownedBy": {
+            "type": "known",
+            "accountId": "712020:59c24993-2215-4484-95e4-0a02bad904e2",
+            "accountType": "atlassian",
+            "email": "vishwanath.singh@tothenew.com",
+            "publicName": "vishwanath.singh",
+            "profilePicture": {
+                "path": "/wiki/aa-avatar/712020:59c24993-2215-4484-95e4-0a02bad904e2",
+                "width": 48,
+                "height": 48,
+                "isDefault": false
+            },
+            "displayName": "vishwanath.singh",
+            "isExternalCollaborator": false,
+            "isGuest": true,
+            "locale": "en_GB",
+            "accountStatus": "active",
+            "_expandable": {
+                "operations": "",
+                "personalSpace": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/user?accountId=712020:59c24993-2215-4484-95e4-0a02bad904e2"
+            }
+        },
+        "createdDate": "2025-06-24T10:04:15.300Z",
+        "_expandable": {
+            "lastUpdated": "",
+            "previousVersion": "",
+            "contributors": "",
+            "nextVersion": ""
+        },
+        "_links": {
+            "self": "https://astrogo.atlassian.net/wiki/rest/api/content/4480270371/history"
+        }
+    },
+    "version": {
+        "by": {
+            "type": "known",
+            "accountId": "712020:59c24993-2215-4484-95e4-0a02bad904e2",
+            "accountType": "atlassian",
+            "email": "vishwanath.singh@tothenew.com",
+            "publicName": "vishwanath.singh",
+            "profilePicture": {
+                "path": "/wiki/aa-avatar/712020:59c24993-2215-4484-95e4-0a02bad904e2",
+                "width": 48,
+                "height": 48,
+                "isDefault": false
+            },
+            "displayName": "vishwanath.singh",
+            "isExternalCollaborator": false,
+            "isGuest": true,
+            "locale": "en_GB",
+            "accountStatus": "active",
+            "_expandable": {
+                "operations": "",
+                "personalSpace": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/user?accountId=712020:59c24993-2215-4484-95e4-0a02bad904e2"
+            }
+        },
+        "when": "2025-09-04T11:04:42.118Z",
+        "friendlyWhen": "just a moment ago",
+        "message": "",
+        "number": 1,
+        "minorEdit": false,
+        "ncsStepVersion": "9",
+        "ncsStepVersionSource": "ncs-ack",
+        "confRev": "confluence$content$4478468209.52",
+        "contentTypeModified": false,
+        "_expandable": {
+            "collaborators": "",
+            "content": "/rest/api/content/4480270371?status=draft"
+        },
+        "_links": {
+            "self": "https://astrogo.atlassian.net/wiki/rest/api/content/4480270371/version/1"
+        }
+    },
+    "ancestors": [
+        {
+            "id": "3872129801",
+            "type": "page",
+            "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:page/3872129801",
+            "base64EncodedAri": "YXJpOmNsb3VkOmNvbmZsdWVuY2U6N2Y2ZGQ5ZDEtMTMyNi00ZjNlLWJmNDYtYjY5OGY4MzRkNzdjOmNvbnRlbnQvMzg3MjEyOTgwMQ==",
+            "status": "current",
+            "title": "Project Alcantara Confluence Space",
+            "macroRenderedOutput": {},
+            "extensions": {
+                "position": 7
+            },
+            "_expandable": {
+                "container": "/rest/api/space/ALC",
+                "metadata": "",
+                "restrictions": "/rest/api/content/3872129801/restriction/byOperation",
+                "history": "/rest/api/content/3872129801/history",
+                "body": "",
+                "version": "",
+                "descendants": "/rest/api/content/3872129801/descendant",
+                "space": "/rest/api/space/ALC",
+                "childTypes": "",
+                "schedulePublishInfo": "",
+                "operations": "",
+                "schedulePublishDate": "",
+                "children": "/rest/api/content/3872129801/child",
+                "ancestors": "",
+                "draftVersion": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/content/3872129801",
+                "tinyui": "/x/CQPM5g",
+                "editui": "/pages/resumedraft.action?draftId=3872129801",
+                "webui": "/spaces/ALC/overview",
+                "edituiv2": "/spaces/ALC/pages/edit-v2/3872129801"
+            }
+        },
+        {
+            "id": "3880091695",
+            "type": "page",
+            "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:page/3880091695",
+            "base64EncodedAri": "YXJpOmNsb3VkOmNvbmZsdWVuY2U6N2Y2ZGQ5ZDEtMTMyNi00ZjNlLWJmNDYtYjY5OGY4MzRkNzdjOmNvbnRlbnQvMzg4MDA5MTY5NQ==",
+            "status": "current",
+            "title": "ARCHITECTURE",
+            "macroRenderedOutput": {},
+            "extensions": {
+                "position": 67408595
+            },
+            "_expandable": {
+                "container": "/rest/api/space/ALC",
+                "metadata": "",
+                "restrictions": "/rest/api/content/3880091695/restriction/byOperation",
+                "history": "/rest/api/content/3880091695/history",
+                "body": "",
+                "version": "",
+                "descendants": "/rest/api/content/3880091695/descendant",
+                "space": "/rest/api/space/ALC",
+                "childTypes": "",
+                "schedulePublishInfo": "",
+                "operations": "",
+                "schedulePublishDate": "",
+                "children": "/rest/api/content/3880091695/child",
+                "ancestors": "",
+                "draftVersion": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/content/3880091695",
+                "tinyui": "/x/L4BF5w",
+                "editui": "/pages/resumedraft.action?draftId=3880091695",
+                "webui": "/spaces/ALC/pages/3880091695/ARCHITECTURE",
+                "edituiv2": "/spaces/ALC/pages/edit-v2/3880091695"
+            }
+        },
+        {
+            "id": "4119789703",
+            "type": "page",
+            "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:page/4119789703",
+            "base64EncodedAri": "YXJpOmNsb3VkOmNvbmZsdWVuY2U6N2Y2ZGQ5ZDEtMTMyNi00ZjNlLWJmNDYtYjY5OGY4MzRkNzdjOmNvbnRlbnQvNDExOTc4OTcwMw==",
+            "status": "current",
+            "title": "PayTV Solution Architecture",
+            "macroRenderedOutput": {},
+            "extensions": {
+                "position": 788
+            },
+            "_expandable": {
+                "container": "/rest/api/space/ALC",
+                "metadata": "",
+                "restrictions": "/rest/api/content/4119789703/restriction/byOperation",
+                "history": "/rest/api/content/4119789703/history",
+                "body": "",
+                "version": "",
+                "descendants": "/rest/api/content/4119789703/descendant",
+                "space": "/rest/api/space/ALC",
+                "childTypes": "",
+                "schedulePublishInfo": "",
+                "operations": "",
+                "schedulePublishDate": "",
+                "children": "/rest/api/content/4119789703/child",
+                "ancestors": "",
+                "draftVersion": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/content/4119789703",
+                "tinyui": "/x/hwCP9Q",
+                "editui": "/pages/resumedraft.action?draftId=4119789703",
+                "webui": "/spaces/ALC/pages/4119789703/PayTV+Solution+Architecture",
+                "edituiv2": "/spaces/ALC/pages/edit-v2/4119789703"
+            }
+        },
+        {
+            "id": "4261380373",
+            "type": "page",
+            "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:page/4261380373",
+            "base64EncodedAri": "YXJpOmNsb3VkOmNvbmZsdWVuY2U6N2Y2ZGQ5ZDEtMTMyNi00ZjNlLWJmNDYtYjY5OGY4MzRkNzdjOmNvbnRlbnQvNDI2MTM4MDM3Mw==",
+            "status": "current",
+            "title": "PayTV: Devices",
+            "macroRenderedOutput": {},
+            "extensions": {
+                "position": 537878611
+            },
+            "_expandable": {
+                "container": "/rest/api/space/ALC",
+                "metadata": "",
+                "restrictions": "/rest/api/content/4261380373/restriction/byOperation",
+                "history": "/rest/api/content/4261380373/history",
+                "body": "",
+                "version": "",
+                "descendants": "/rest/api/content/4261380373/descendant",
+                "space": "/rest/api/space/ALC",
+                "childTypes": "",
+                "schedulePublishInfo": "",
+                "operations": "",
+                "schedulePublishDate": "",
+                "children": "/rest/api/content/4261380373/child",
+                "ancestors": "",
+                "draftVersion": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/content/4261380373",
+                "tinyui": "/x/FYH--Q",
+                "editui": "/pages/resumedraft.action?draftId=4261380373",
+                "webui": "/spaces/ALC/pages/4261380373/PayTV+Devices",
+                "edituiv2": "/spaces/ALC/pages/edit-v2/4261380373"
+            }
+        },
+        {
+            "id": "4261053074",
+            "type": "page",
+            "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:page/4261053074",
+            "base64EncodedAri": "YXJpOmNsb3VkOmNvbmZsdWVuY2U6N2Y2ZGQ5ZDEtMTMyNi00ZjNlLWJmNDYtYjY5OGY4MzRkNzdjOmNvbnRlbnQvNDI2MTA1MzA3NA==",
+            "status": "current",
+            "title": "PayTV: STB+Unmanaged Devices",
+            "macroRenderedOutput": {},
+            "extensions": {
+                "position": 260075705
+            },
+            "_expandable": {
+                "container": "/rest/api/space/ALC",
+                "metadata": "",
+                "restrictions": "/rest/api/content/4261053074/restriction/byOperation",
+                "history": "/rest/api/content/4261053074/history",
+                "body": "",
+                "version": "",
+                "descendants": "/rest/api/content/4261053074/descendant",
+                "space": "/rest/api/space/ALC",
+                "childTypes": "",
+                "schedulePublishInfo": "",
+                "operations": "",
+                "schedulePublishDate": "",
+                "children": "/rest/api/content/4261053074/child",
+                "ancestors": "",
+                "draftVersion": ""
+            },
+            "_links": {
+                "self": "https://astrogo.atlassian.net/wiki/rest/api/content/4261053074",
+                "tinyui": "/x/koL6-Q",
+                "editui": "/pages/resumedraft.action?draftId=4261053074",
+                "webui": "/spaces/ALC/pages/4261053074/PayTV+STB+Unmanaged+Devices",
+                "edituiv2": "/spaces/ALC/pages/edit-v2/4261053074"
+            }
+        }
+    ],
+    "container": {
+        "id": 3872129091,
+        "ari": "ari:cloud:confluence:7f6dd9d1-1326-4f3e-bf46-b698f834d77c:space/3872129091",
+        "key": "ALC",
+        "alias": "ALC",
+        "name": "Alcantara",
+        "type": "global",
+        "status": "current",
+        "history": {
+            "createdBy": {
+                "type": "known",
+                "accountId": "557058:a6ff5bd5-6039-4d04-96c1-db5aa6d33355",
+                "accountType": "atlassian",
+                "email": "",
+                "publicName": "Peter Koay",
+                "timeZone": "Asia/Kuala_Lumpur",
+                "profilePicture": {
+                    "path": "/wiki/aa-avatar/557058:a6ff5bd5-6039-4d04-96c1-db5aa6d33355",
+                    "width": 48,
+                    "height": 48,
+                    "isDefault": false
+                },
+                "displayName": "Peter Koay",
+                "isExternalCollaborator": false,
+                "isGuest": false,
+                "locale": "en_US",
+                "accountStatus": "active",
+                "_expandable": {
+                    "operations": "",
+                    "personalSpace": ""
+                },
+                "_links": {
+                    "self": "https://astrogo.atlassian.net/wiki/rest/api/user?accountId=557058:a6ff5bd5-6039-4d04-96c1-db5aa6d33355"
+                }
+            },
+            "createdDate": "2024-02-07T04:47:25.456Z"
+        },
+        "_expandable": {
+            "settings": "/rest/api/space/ALC/settings",
+            "metadata": "",
+            "operations": "",
+            "lookAndFeel": "/rest/api/settings/lookandfeel?spaceKey=ALC",
+            "identifiers": "",
+            "permissions": "",
+            "roles": "",
+            "icon": "",
+            "typeSettings": "",
+            "description": "",
+            "theme": "/rest/api/space/ALC/theme",
+            "homepage": "/rest/api/content/3872129801"
+        },
+        "_links": {
+            "webui": "/spaces/ALC",
+            "self": "https://astrogo.atlassian.net/wiki/rest/api/space/ALC"
+        }
+    },
+    "macroRenderedOutput": {},
+    "body": {
+        "storage": {
+            "value": "<p /><p>[ <u>Document control</u> ] [ <u>Solution overview</u> ] [ <u>Solution Sequence Diagram</u> ] [ <u>OPC Flow Diagram</u> ]</p><h4><strong>Document control</strong></h4><table data-table-width=\"760\" data-layout=\"default\" ac:local-id=\"023301e3-0863-4f3b-9dd5-2ed37b9d41f0\"><tbody><tr><td><p><strong>Solution owner</strong></p></td><td><p><ac:link><ri:user ri:account-id=\"5a30d1f973ad9e3ead2363bb\" ri:local-id=\"e042a185-18c5-4576-a77f-7c336d12b9fc\" /></ac:link><ac:link><ri:user ri:account-id=\"5c46cb920abefd4ed4eceb4a\" ri:local-id=\"78275b0e-db2b-4604-8920-ed700b43b925\" /></ac:link> <ac:link><ri:user ri:account-id=\"5a2e4cf0301ed0381f22d3c4\" ri:local-id=\"c0505aaa-2677-42f7-9f1f-da335b6f7c7f\" /></ac:link></p></td></tr><tr><td><p><strong>System architect owner</strong></p></td><td><p>@{SysArch} here</p></td></tr><tr><td><p><strong>Product owner</strong></p></td><td><p>@{ProdOwn} here</p></td></tr><tr><td><p><strong>TTN owner</strong></p></td><td><p><ac:link><ri:user ri:account-id=\"5a2e4cf0301ed0381f22d3c4\" ri:local-id=\"edbc09fb-841c-45a2-9e0d-2351fd243e22\" /></ac:link> <ac:link><ri:user ri:account-id=\"712020:59c24993-2215-4484-95e4-0a02bad904e2\" ri:local-id=\"79089cf0-6549-4e50-8f40-9a2d80ad1f18\" /></ac:link></p></td></tr><tr><td><p><strong>Customer owner</strong></p></td><td><p>@{CustLead} here</p></td></tr><tr><td><p><strong>Document creation date</strong></p></td><td><p><time datetime=\"2025-06-24\" /> </p></td></tr><tr><td><p><strong>Document version</strong></p></td><td data-highlight-colour=\"#ffffff\"><p /><p>v1.0</p></td></tr><tr><td><p><strong>Document status</strong></p></td><td><p><ac:structured-macro ac:name=\"status\" ac:schema-version=\"1\" ac:macro-id=\"1e95eedc-8516-4067-920d-e28f8e4a5efe\"><ac:parameter ac:name=\"title\">internal Review</ac:parameter><ac:parameter ac:name=\"colour\">Yellow</ac:parameter></ac:structured-macro> <ac:structured-macro ac:name=\"status\" ac:schema-version=\"1\" ac:macro-id=\"56081708-4281-4e2e-8b6f-95c047d7b63e\"><ac:parameter ac:name=\"title\">draft</ac:parameter></ac:structured-macro></p></td></tr><tr><td><p><strong>Document number</strong></p></td><td><p>4480270371</p></td></tr><tr><td><p><strong>Tracking Jira</strong></p></td><td><p><ac:structured-macro ac:name=\"jira\" ac:schema-version=\"1\" ac:macro-id=\"32d9988e-e98f-4308-b1c7-21900d5a7e2e\"><ac:parameter ac:name=\"key\">ALTV-87</ac:parameter><ac:parameter ac:name=\"serverId\">f0a94ee6-f3ae-3007-8689-a561eebaa6c4</ac:parameter><ac:parameter ac:name=\"server\">System Jira</ac:parameter></ac:structured-macro> </p></td></tr></tbody></table><h4>Solution overview</h4><table data-table-width=\"1011\" data-layout=\"default\" ac:local-id=\"d7218824-66b3-473b-9af8-670bf12634a4\"><tbody><tr><td><p><strong>Overview</strong>&nbsp;</p></td><td><p>This document describe SEO solution for web.<br />Note : This does not include URL shortening and ContentId shortening solution.</p></td></tr><tr><td><p><strong>Alcantara Parent</strong></p></td><td><p>&nbsp;<ac:structured-macro ac:name=\"jira\" ac:schema-version=\"1\" ac:macro-id=\"8b793e41-5aae-42c1-ac65-d1073684ac4d\"><ac:parameter ac:name=\"key\">ALTV-86</ac:parameter><ac:parameter ac:name=\"serverId\">f0a94ee6-f3ae-3007-8689-a561eebaa6c4</ac:parameter><ac:parameter ac:name=\"server\">System Jira</ac:parameter></ac:structured-macro></p></td></tr><tr><td><p><strong>Alcantara Tickets</strong></p></td><td><p> <ac:structured-macro ac:name=\"jira\" ac:schema-version=\"1\" ac:macro-id=\"cbef5f42-6a91-491b-bf4b-9afea3ddb733\"><ac:parameter ac:name=\"key\">ALTV-87</ac:parameter><ac:parameter ac:name=\"serverId\">f0a94ee6-f3ae-3007-8689-a561eebaa6c4</ac:parameter><ac:parameter ac:name=\"server\">System Jira</ac:parameter></ac:structured-macro></p></td></tr><tr><td><p><strong>Feature Parent</strong></p></td><td><p>&nbsp; </p></td></tr><tr><td><p><strong>Feature Tickets</strong></p></td><td><p>{Jira reference in Irdeto Workspace}</p></td></tr><tr><td><p><strong>Actors</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>User Interfaces</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>Systems</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>Preconditions</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>Main Scenario</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>Post Condition&nbsp;</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>APIs Used</strong>&nbsp;</p></td><td><p>&nbsp;</p></td></tr><tr><td><p><strong>OPC Req&rsquo;s</strong></p></td><td><p>{List of screens}</p><p>{List of fields (display name) and field attribute source per screen}</p><p>{OPC field validation rules}</p></td></tr><tr><td><p><strong>Monitoring Req&rsquo;s</strong></p></td><td><p>{Monitoring points, values to be monitored, thresholds for alerting}</p></td></tr><tr><td><p><strong>Data/Analytics Req&rsquo;s</strong></p></td><td><p>{Informed by SLA KPI&rsquo;s}</p></td></tr><tr><td><p><strong>Open Actions</strong></p></td><td><ul><li><p>{Open action for attention @{name} or Open action Jira ticket}</p></li></ul></td></tr></tbody></table><h4><strong>Solution Sequence Diagram</strong></h4><ac:image ac:align=\"center\" ac:layout=\"center\" ac:original-height=\"3839\" ac:original-width=\"2600\" ac:custom-width=\"true\" ac:alt=\"Mermaid Chart - Create complex, visual diagrams with text. A smarter way of creating diagrams.-2025-07-15-125415.png\" ac:width=\"760\"><ri:attachment ri:filename=\"Mermaid Chart - Create complex, visual diagrams with text. A smarter way of creating diagrams.-2025-07-15-125415.png\" ri:version-at-save=\"1\" /></ac:image><p><strong>Header Tags Mapping  </strong></p><p>H1,H2,H3,H4 header tags would be based on Content Meta information,&nbsp;these are defined in the Meta Mapping document <ac:link ac:card-appearance=\"inline\"><ri:page ri:content-title=\"Movie Figma Metadata Mapping\" ri:version-at-save=\"21\" /><ac:link-body>Movie Figma Metadata Mapping</ac:link-body></ac:link> and are also explained for ALTV-87 Pdf, Sample: H1- is fixed Link(Astro Link),&nbsp;H2- Rail Title ,Event Title, Content Title, H3 - Metadata Such as Year, Duration, Genre, Parental Rating, H4- Content Synopsis, Event Synopsis.<br /></p><p>&nbsp;</p><h4>OPC Flow Diagram</h4><p>{Insert a flow diagram of intended operator actions/operator journey here}</p>",
+            "representation": "storage",
+            "embeddedContent": [],
+            "_expandable": {
+                "content": "/rest/api/content/4480270371?status=draft"
+            }
+        },
+        "_expandable": {
+            "editor": "",
+            "atlas_doc_format": "",
+            "view": "",
+            "export_view": "",
+            "styled_view": "",
+            "dynamic": "",
+            "editor2": "",
+            "anonymous_export_view": ""
+        }
+    },
+    "extensions": {
+        "position": 323087311
+    },
+    "_expandable": {
+        "childTypes": "",
+        "schedulePublishInfo": "",
+        "metadata": "",
+        "operations": "",
+        "schedulePublishDate": "",
+        "children": "/rest/api/content/4480270371/child",
+        "restrictions": "/rest/api/content/4480270371/restriction/byOperation",
+        "draftVersion": "",
+        "descendants": "/rest/api/content/4480270371/descendant"
+    },
+    "_links": {
+        "editui": "/pages/resumedraft.action?draftId=4480270371",
+        "webui": "/pages/resumedraft.action?draftId=4480270371",
+        "edituiv2": "/spaces/ALC/pages/edit-v2/4480270371",
+        "context": "/wiki",
+        "self": "https://astrogo.atlassian.net/wiki/rest/api/content/4480270371?status=draft",
+        "tinyui": "/x/cQDwCgE",
+        "collection": "/rest/api/content",
+        "base": "https://astrogo.atlassian.net/wiki"
+    }
+}
+
+
+
+https://astrogo.atlassian.net/cgraphql?q=WatchDialogQueryWithWatchChildren
+
+
+{"operationName":"WatchDialogQueryWithWatchChildren","variables":{"contentId":"4480270371"},"query":"query WatchDialogQueryWithWatchChildren($contentId: ID!) {\n  singleContent(id: $contentId) {\n    id\n    ...WatchDialogContentFragmentWithWatchChildren\n    __typename\n  }\n}\n\nfragment WatchDialogContentFragmentWithWatchChildren on Content {\n  id\n  currentUserIsWatching\n  currentUserIsWatchingChildren\n  currentUserHasAncestorWatchingChildren\n  type\n  space {\n    id\n    key\n    currentUser {\n      isWatched\n      isWatchingBlogs\n      __typename\n    }\n    operations {\n      operation\n      targetType\n      __typename\n    }\n    __typename\n  }\n  __typename\n}\n"}

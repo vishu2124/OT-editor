@@ -1,0 +1,62 @@
+sequenceDiagram
+    participant U as User
+    participant FE as Frontend
+    participant BFF as BFF Layer
+    participant AUTH as Auth Service
+    participant US as User Service
+    participant PG as PostgreSQL
+    participant SSO as SSO Provider
+
+    Note over U,SSO: User Authentication Flow
+    
+    U->>FE: Login Request
+    FE->>BFF: POST /auth/login
+    BFF->>AUTH: Validate Credentials
+    
+    alt Email/Password Auth
+        AUTH->>PG: Query user credentials
+        PG-->>AUTH: User data + hashed password
+        AUTH->>AUTH: Verify password (bcrypt)
+    else SSO Auth
+        AUTH->>SSO: OAuth 2.0 flow
+        SSO-->>AUTH: User profile + tokens
+    end
+    
+    AUTH->>AUTH: Generate JWT token
+    AUTH-->>BFF: JWT + user profile
+    BFF-->>FE: Authentication response
+    FE->>FE: Store token in localStorage
+    
+    Note over U,SSO: Role-Based Access Control
+    
+    U->>FE: Access protected resource
+    FE->>BFF: Request with JWT
+    BFF->>AUTH: Validate JWT token
+    AUTH-->>BFF: Token valid + user claims
+    
+    BFF->>US: Check permissions
+    US->>PG: Query user roles & permissions
+    PG-->>US: Role data
+    US->>US: Evaluate RBAC rules
+    
+    alt Has Permission
+        US-->>BFF: Permission granted
+        BFF-->>FE: Resource access allowed
+        FE-->>U: Display content
+    else No Permission
+        US-->>BFF: Permission denied
+        BFF-->>FE: 403 Forbidden
+        FE-->>U: Access denied message
+    end
+    
+    Note over U,SSO: Admin Role Management
+    
+    U->>FE: Assign user role (Admin only)
+    FE->>BFF: PUT /users/{id}/role
+    BFF->>AUTH: Validate admin permissions
+    BFF->>US: Update user role
+    US->>PG: Update user_role table
+    PG-->>US: Role updated
+    US-->>BFF: Success response
+    BFF-->>FE: Role assignment confirmed
+    FE-->>U: Success notification

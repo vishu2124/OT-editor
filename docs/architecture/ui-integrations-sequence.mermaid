@@ -1,0 +1,109 @@
+sequenceDiagram
+    participant U as User
+    participant FE as Frontend
+    participant BFF as BFF Layer
+    participant DS as Document Service
+    participant NS as Notification Service
+    participant EXT as External Service
+    participant PG as PostgreSQL
+    participant EMAIL as Email Service
+
+    Note over U,EMAIL: WYSIWYG Editor Integration
+    
+    U->>FE: Open page editor
+    FE->>BFF: GET /pages/{id}
+    BFF->>DS: Get page content
+    DS->>PG: SELECT page data
+    PG-->>DS: Page content
+    DS-->>BFF: Page data
+    BFF-->>FE: Page content (HTML/Markdown)
+    FE->>FE: Initialize WYSIWYG editor (Quill/Draft.js)
+    FE-->>U: Show rich text editor
+    
+    U->>FE: Format text (bold, italic, etc.)
+    FE->>FE: Apply formatting locally
+    U->>FE: Save changes
+    FE->>BFF: PUT /pages/{id}
+    BFF->>DS: Update page content
+    DS->>PG: UPDATE pages SET content=formatted_content
+    PG-->>DS: Page updated
+    DS-->>BFF: Update success
+    BFF-->>FE: Save confirmed
+    FE-->>U: Show save success
+    
+    Note over U,EMAIL: Third-Party Embeddings
+    
+    U->>FE: Add Google Drive embed
+    FE->>FE: Show embed URL input
+    U->>FE: Enter Google Drive URL
+    FE->>BFF: POST /embeds/validate
+    BFF->>EXT: Validate embed URL (oEmbed)
+    EXT-->>BFF: Embed metadata
+    BFF->>BFF: Sanitize embed data
+    BFF-->>FE: Valid embed data
+    FE->>FE: Render iframe with sandbox
+    FE-->>U: Show embedded content
+    
+    Note over U,EMAIL: Page Tree Navigation
+    
+    U->>FE: Load space navigation
+    FE->>BFF: GET /spaces/{id}/tree
+    BFF->>DS: Get page hierarchy
+    DS->>PG: SELECT pages with parent-child relationships
+    PG-->>DS: Page tree data
+    DS-->>BFF: Hierarchical page structure
+    BFF-->>FE: Page tree JSON
+    FE->>FE: Render expandable tree component
+    FE-->>U: Show page navigation tree
+    
+    U->>FE: Drag & drop page reorder
+    FE->>BFF: PUT /pages/{id}/reorder
+    BFF->>DS: Update page order
+    DS->>PG: UPDATE pages SET parent_id, order_index
+    PG-->>DS: Order updated
+    DS-->>BFF: Reorder success
+    BFF-->>FE: Update confirmed
+    FE->>FE: Update tree display
+    FE-->>U: Show new page order
+    
+    Note over U,EMAIL: API Access & Integrations
+    
+    U->>FE: Generate API key
+    FE->>BFF: POST /api-keys
+    BFF->>DS: Create API key
+    DS->>PG: INSERT into api_keys table
+    PG-->>DS: API key created
+    DS-->>BFF: API key data
+    BFF-->>FE: API key + secret
+    FE-->>U: Display API credentials
+    
+    Note over U,EMAIL: External API Call Example
+    
+    EXT->>BFF: GET /api/v1/pages (with API key)
+    BFF->>BFF: Validate API key
+    BFF->>DS: Get pages
+    DS->>PG: SELECT pages data
+    PG-->>DS: Pages data
+    DS-->>BFF: Pages list
+    BFF-->>EXT: JSON response
+    EXT->>EXT: Process API response
+    
+    Note over U,EMAIL: Notification System
+    
+    U->>FE: Enable email notifications
+    FE->>BFF: PUT /users/{id}/notifications
+    BFF->>NS: Update notification preferences
+    NS->>PG: UPDATE user_notifications table
+    PG-->>NS: Preferences updated
+    NS-->>BFF: Update success
+    BFF-->>FE: Preferences saved
+    FE-->>U: Notification settings updated
+    
+    Note over U,EMAIL: Email Notification Flow
+    
+    DS->>NS: Page updated event
+    NS->>PG: SELECT users to notify
+    PG-->>NS: Subscribed users
+    NS->>EMAIL: Send notification emails
+    EMAIL-->>NS: Emails sent
+    NS-->>DS: Notifications processed
