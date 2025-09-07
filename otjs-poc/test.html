@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OT.js Collaborative Editor Test</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ot@0.0.15/lib/ot.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .editor-container {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        #editor {
+            width: 100%;
+            height: 300px;
+            border: none;
+            outline: none;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            resize: vertical;
+        }
+        .users {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 4px;
+        }
+        .user {
+            display: inline-block;
+            margin: 5px;
+            padding: 5px 10px;
+            background-color: #007bff;
+            color: white;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        .status {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            border-radius: 4px;
+            color: #155724;
+        }
+        .error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <h1>OT.js Collaborative Editor Test</h1>
+    
+    <div class="status" id="status">Connecting to server...</div>
+    
+    <div class="users">
+        <strong>Active Users:</strong>
+        <div id="users"></div>
+    </div>
+    
+    <div class="editor-container">
+        <textarea id="editor" placeholder="Start typing to collaborate in real-time..."></textarea>
+    </div>
+    
+    <div>
+        <button onclick="createNewDocument()">Create New Document</button>
+        <button onclick="joinDocument()">Join Document</button>
+        <input type="text" id="documentId" placeholder="Document ID" style="margin-left: 10px; padding: 5px;">
+    </div>
+
+    <script>
+        const socket = io();
+        const editor = document.getElementById('editor');
+        const status = document.getElementById('status');
+        const users = document.getElementById('users');
+        const documentIdInput = document.getElementById('documentId');
+        
+        let otClient = null;
+        let currentDocumentId = null;
+        let isApplyingOperation = false;
+        
+        // Generate a random document ID for testing
+        function generateDocumentId() {
+            return 'doc-' + Math.random().toString(36).substr(2, 9);
+        }
+        
+        // Create new document
+        function createNewDocument() {
+            const newDocId = generateDocumentId();
+            documentIdInput.value = newDocId;
+            joinDocument();
+        }
+        
+        // Join document
+        function joinDocument() {
+            const docId = documentIdInput.value || generateDocumentId();
+            if (docId) {
+                currentDocumentId = docId;
+                socket.emit('join-document', { documentId: docId });
+                status.textContent = `Joining document: ${docId}`;
+                status.className = 'status';
+            }
+        }
+        
+        // Socket event handlers
+        socket.on('connect', () => {
+            status.textContent = 'Connected to server';
+            status.className = 'status';
+        });
+        
+        socket.on('disconnect', () => {
+            status.textContent = 'Disconnected from server';
+            status.className = 'status error';
+        });
+        
+        socket.on('document-state', (data) => {
+            editor.value = data.content;
+            otClient = new ot.Client(data.version);
+            status.textContent = `Document loaded. Version: ${data.version}`;
+            status.className = 'status';
+            updateUsers(data.activeUsers);
+        });
+        
+        socket.on('operation', (data) => {
+            if (otClient && !isApplyingOperation) {
+                try {
+                    otClient.applyOperation(data.operation);
+                    isApplyingOperation = true;
+                    editor.value = otClient.document;
+                    isApplyingOperation = false;
+                } catch (error) {
+                    console.error('Error applying operation:', error);
+                }
+            }
+        });
+        
+        socket.on('user-joined', (user) => {
+            status.textContent = `${user.name} joined the document`;
+            status.className = 'status';
+            // Refresh user list
+            socket.emit('join-document', { documentId: currentDocumentId });
+        });
+        
+        socket.on('user-left', (user) => {
+            status.textContent = `${user.name} left the document`;
+            status.className = 'status';
+        });
+        
+        socket.on('error', (data) => {
+            status.textContent = `Error: ${data.message}`;
+            status.className = 'status error';
+        });
+        
+        // Editor event handlers
+        editor.addEventListener('input', () => {
+            if (otClient && !isApplyingOperation) {
+                const operation = new ot.TextOperation()
+                    .retain(editor.selectionStart)
+                    .insert(editor.value)
+                    .delete(editor.value.length - editor.selectionStart);
+                
+                socket.emit('operation', {
+                    documentId: currentDocumentId,
+                    operation: operation
+                });
+            }
+        });
+        
+        // Update users display
+        function updateUsers(activeUsers) {
+            users.innerHTML = '';
+            activeUsers.forEach(user => {
+                const userDiv = document.createElement('div');
+                userDiv.className = 'user';
+                userDiv.style.backgroundColor = user.color;
+                userDiv.textContent = user.name;
+                users.appendChild(userDiv);
+            });
+        }
+        
+        // Auto-join a document on page load
+        window.addEventListener('load', () => {
+            createNewDocument();
+        });
+    </script>
+</body>
+</html>
